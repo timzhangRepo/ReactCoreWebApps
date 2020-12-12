@@ -1,16 +1,34 @@
 import React from 'react';
 import '../assets/css/Todolist.css';
+
 class Todolist extends React.Component {
     constructor() {
         super();
-        this.state={
-            userinput:'',
-            taskList:[],
+        this.state = {
+            userinput: '',
+            taskList: [],
+            myList: [
+                {
+                    title: 'Buy apple',
+                    checked: true
+                },
+                {
+                    title: 'Buy PS5',
+                    checked: false
+                },
+                {
+                    title: 'Get a hair cut on Sunday',
+                    checked: true
+                }
+            ]
         }
     }
-    addToList=()=>{
-        let input =this.state.userinput;
-        if(input.length<1){return;}
+
+    addToList = () => {
+        let input = this.state.userinput;
+        if (input.length < 1) {
+            return;
+        }
         //Handle empty strings
 
         let templist = this.state.taskList;
@@ -20,7 +38,7 @@ class Todolist extends React.Component {
         })
     }
 
-    removeTask=(key)=>{
+    removeTask = (key) => {
         let tempList = this.state.taskList;
         tempList.splice(key, 1);
         this.setState({
@@ -28,28 +46,59 @@ class Todolist extends React.Component {
         })
 
     }
-    userInputCapture=(event)=>{
+    userInputCapture = (event) => {
         this.setState({
-            userinput:event.target.value
+            userinput: event.target.value
         })
 
     }
+
+
+
+
     render() {
         return (
             <div>
-                <h3>My To-Do List</h3>
-                <input value={this.state.username} type="text" onChange={this.userInputCapture}/><button onClick={this.addToList}>ADD</button>
+                <h2>My To-Do List</h2>
+                <input value={this.state.username} type="text" onChange={this.userInputCapture}/>
+                <button onClick={this.addToList}>ADD</button>
                 <hr/>
+                <h4>To-Do Tasks</h4>
                 <ul>
                     {
-                        this.state.taskList.map((value, key)=>{
-                            return (
-                                <li key={key}>{value} --- <button onClick={this.removeTask.bind(this, key)}>Delete</button></li>
-                            )
+                        this.state.myList.map((value, key) => {
+                            if(!value.checked){
+                                return (
+                                    <li key={key}>
+                                        <input type={"checkbox"} checked={value.checked}/>
+                                        {value.title}
+                                        <button>Delete</button>
+                                    </li>
+                                )
+                            }
+                        })
+                    }
+                </ul>
+                <hr/>
+                <h4>Finished Tasks</h4>
+                <ul>
+                    {
+                        this.state.myList.map((value, key) => {
+                            if(value.checked){
+                                return (
+                                    <li key={key}>
+                                        <input type={"checkbox"} checked={value.checked}/>
+                                        {value.title}
+                                        <button>Delete</button>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>
             </div>
         );
     }
-}export default Todolist
+}
+
+export default Todolist
