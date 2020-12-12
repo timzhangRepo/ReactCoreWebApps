@@ -6,7 +6,6 @@ class Todolist extends React.Component {
         super();
         this.state = {
             userinput: '',
-            taskList: [],
             myList: [
                 {
                     title: 'Buy apple',
@@ -24,18 +23,23 @@ class Todolist extends React.Component {
         }
     }
 
-    addToList = () => {
-        let input = this.state.userinput;
-        if (input.length < 1) {
-            return;
+    addToList = (e) => {
+        //When Hit Enter by user
+        if(e.keyCode==13 || e.target.id=="submit") {
+            let input = this.state.userinput;
+            if (input.length < 1) {
+                return;
+            }
+            //Handle empty strings
+            let templist = this.state.myList;
+            templist.push({
+                title: input,
+                checked: false
+            });
+            this.setState({
+                taskList: templist,
+            })
         }
-        //Handle empty strings
-
-        let templist = this.state.taskList;
-        templist.push(input);
-        this.setState({
-            taskList: templist,
-        })
     }
 
     removeTask = (key) => {
@@ -60,8 +64,8 @@ class Todolist extends React.Component {
         return (
             <div>
                 <h2>My To-Do List</h2>
-                <input value={this.state.username} type="text" onChange={this.userInputCapture}/>
-                <button onClick={this.addToList}>ADD</button>
+                <input value={this.state.username} type="text" onChange={this.userInputCapture} onKeyUp={this.addToList}/>
+                <button id="submit" onClick={this.addToList}>ADD</button>
                 <hr/>
                 <h4>To-Do Tasks</h4>
                 <ul>
