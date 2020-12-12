@@ -11,7 +11,7 @@ class Todolist extends React.Component {
     addToList=()=>{
         let input =this.state.userinput;
         if(input.length<1){return;}
-        //Handle empty string
+        //Handle empty strings
 
         let templist = this.state.taskList;
 
@@ -19,6 +19,10 @@ class Todolist extends React.Component {
         this.setState({
             taskList: templist,
         })
+    }
+
+    removeTask=(key)=>{
+        alert(key);
     }
     userInputCapture=(event)=>{
         this.setState({
@@ -34,9 +38,9 @@ class Todolist extends React.Component {
                 <hr/>
                 <ul>
                     {
-                        this.state.taskList.map(function(value, key){
+                        this.state.taskList.map((value, key)=>{
                             return (
-                                <li key={key}>{value} --- <button>Delete</button></li>
+                                <li key={key}>{value} --- <button onClick={this.removeTask.bind(this, key)}>Delete</button></li>
                             )
                         })
                     }
