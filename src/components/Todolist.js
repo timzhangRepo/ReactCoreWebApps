@@ -43,12 +43,11 @@ class Todolist extends React.Component {
     }
 
     removeTask = (key) => {
-        let tempList = this.state.taskList;
+        let tempList = this.state.myList;
         tempList.splice(key, 1);
         this.setState({
-            taskList: tempList
+            myList: tempList
         })
-
     }
     userInputCapture = (event) => {
         this.setState({
@@ -56,6 +55,15 @@ class Todolist extends React.Component {
         })
 
     }
+
+    checkToggle = (key) =>{
+        let templist = this.state.myList;
+        templist[key].checked =! templist[key].checked;
+        this.setState({
+            myList:templist,
+        });
+    }
+
 
 
 
@@ -74,9 +82,9 @@ class Todolist extends React.Component {
                             if(!value.checked){
                                 return (
                                     <li key={key}>
-                                        <input type={"checkbox"} checked={value.checked}/>
+                                        <input type={"checkbox"} checked={value.checked} onChange={this.checkToggle.bind(this,key)}/>
                                         {value.title}
-                                        <button>Delete</button>
+                                        <button onClick={this.removeTask.bind(this, key)}>Delete</button>
                                     </li>
                                 )
                             }
@@ -91,9 +99,9 @@ class Todolist extends React.Component {
                             if(value.checked){
                                 return (
                                     <li key={key}>
-                                        <input type={"checkbox"} checked={value.checked}/>
+                                        <input type={"checkbox"} checked={value.checked} onChange={this.checkToggle.bind(this,key)}/>
                                         {value.title}
-                                        <button>Delete</button>
+                                        <button onClick={this.checkToggle.bind(this, key)}>Delete</button>
                                     </li>
                                 )
                             }
