@@ -1,25 +1,15 @@
 import React from 'react';
 import '../assets/css/Todolist.css';
 
+//Import self defined moudle.
+import mystroage from '../model/storage'
+
 class Todolist extends React.Component {
     constructor() {
         super();
         this.state = {
             userinput: '',
-            myList: [
-                {
-                    title: 'Buy apple',
-                    checked: true
-                },
-                {
-                    title: 'Buy PS5',
-                    checked: false
-                },
-                {
-                    title: 'Get a hair cut on Sunday',
-                    checked: true
-                }
-            ]
+            myList: []
         }
     }
 
@@ -39,6 +29,7 @@ class Todolist extends React.Component {
             this.setState({
                 taskList: templist,
             })
+            mystroage.set('todolist',templist);
         }
     }
 
@@ -48,6 +39,7 @@ class Todolist extends React.Component {
         this.setState({
             myList: tempList
         })
+        mystroage.set('todolist',tempList);
     }
     userInputCapture = (event) => {
         this.setState({
@@ -62,9 +54,21 @@ class Todolist extends React.Component {
         this.setState({
             myList:templist,
         });
+        mystroage.set('todolist',templist);
     }
 
 
+    //trigger when page load
+    //React LifeCycle
+    componentDidMount(){
+        //get local stroage
+        var list = mystroage.get('todolist');
+        if(list){
+            this.setState({
+                myList: list,
+            })
+        }
+    }
 
 
 
