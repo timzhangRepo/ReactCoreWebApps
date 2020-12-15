@@ -11,6 +11,11 @@ function App() {
     return (
         <Router>
             <div className="App">
+                <header className="nav_box">
+                    <Link to = "/">Home</Link>
+                    <Link to = "/news">News</Link>
+                    <Link to = "/todolist">ToDoList</Link>
+                </header>
                 <Route exact path="/" component={Home}/>
                 <Route path="/news" component={News}/>
                 <Route path="/todolist" component={Todolist}/>
