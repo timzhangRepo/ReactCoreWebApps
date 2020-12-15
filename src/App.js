@@ -4,6 +4,7 @@ import Home from './components/Home';
 import News from './components/News.js'
 import './assets/css/App.css';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import Pcontent from "./components/Pcontent";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                 </header>
                 <Route exact path="/" component={Home}/>
                 <Route path="/news" component={News}/>
+                <Route path="/pcontent/:id" component={Pcontent}/>
                 <Route path="/todolist" component={Todolist}/>
             </div>
         </Router>
