@@ -1,5 +1,5 @@
 import React from 'react';
-class News extends React.Component {
+class Home extends React.Component {
     constructor() {
         super();
         this.state={
@@ -9,8 +9,8 @@ class News extends React.Component {
     render() {
         return (
             <div>
-                <p>this is the News component</p>
+                <p>this is the Home component</p>
             </div>
         );
     }
-}export default News;
+}export default Home;
